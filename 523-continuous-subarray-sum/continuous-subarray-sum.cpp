@@ -17,7 +17,8 @@ public:
             {
                 if(i - mp[remainder] >= 2) return true;
             }
-            else mp[remainder] = i;
+            else 
+                mp[remainder] = i;
 
         }
         return false;
