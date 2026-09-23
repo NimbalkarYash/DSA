@@ -1,7 +1,7 @@
 class Solution {
 public:
     int firstUniqChar(string s) {
-        int n = s.size();
+    int n = s.size();
     unordered_map<char, int> mp;
     int answer = INT_MAX;
 
