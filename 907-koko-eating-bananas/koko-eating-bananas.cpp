@@ -46,7 +46,6 @@ public:
         return sum<=h;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
-        int ans = BinaryTraversal(piles, h);
-        return ans;
+        return BinaryTraversal(piles, h);
     }
 };
