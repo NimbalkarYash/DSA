@@ -41,15 +41,13 @@ public:
 
         for(int w : weights) {
 
-            if(currentLoad + w  > capacity) {//if adding the new load exceeds the capacity, this load is shipped the next day, hence increment the day, and set load to the new load
+            currentLoad += w;//add the new weight to the currentLoad
+
+            if(currentLoad  > capacity) {//if adding the new load exceeds the capacity, this load is shipped the next day, hence increment the day, and set load to the new load
                 daysNeeded++;      
                 currentLoad = w;  
             } 
-            //it reaches exact capacity, then reset it and start a new day
-            else
-            {
-                currentLoad+=w;
-            }
+            
         }
         
         // If we needed more days than allowed, this capacity is invalid
