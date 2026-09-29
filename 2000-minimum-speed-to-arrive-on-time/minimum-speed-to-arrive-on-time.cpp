@@ -1,31 +1,45 @@
 class Solution {
 public:
-    int minSpeedOnTime(vector<int>& dist, double hour) {
-        int s = 1, e = 10000000;
+
+    int helper(vector<int>& dist, double hour)
+    {
+        int l =1;
+        int r = 1e9;
+
         int ans = -1;
 
-        while (s <= e) {
-
-            int mid = s + (e - s) / 2;
-
-            double hrs = 0;
-
-            for (int i = 0; i < dist.size() - 1; i++) {
-                // Removed the extra parenthesis at the end of this line
-                hrs += (dist[i] + mid - 1) / mid; 
-            }
-
-            hrs += (double) dist[dist.size() - 1] / mid;
-
-            if (hrs <= hour) {
+        while(l<=r)
+        {
+            int mid = l + (r-l)/2;
+            if(check(dist, hour, mid))
+            {
                 ans = mid;
-                e = mid - 1;
+                r = mid-1;
             }
-            else {
-                s = mid + 1;
+            else
+            {
+                l = mid+1;
             }
         }
 
         return ans;
+    }
+
+    bool check(vector<int>& dist, double hour, int time)
+    {
+
+        double sum = 0.0;
+
+        for(int i = 0; i<dist.size()-1;i++)
+        {
+            sum += (dist[i] + time - 1)/time;
+        }
+        sum+= ((double)dist[dist.size()-1])/time;
+
+        return sum<=hour;
+    }
+
+    int minSpeedOnTime(vector<int>& dist, double hour) {
+        return helper(dist, hour);
     }
 };
