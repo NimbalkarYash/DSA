@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        int low = matrix[0][0];
+        int high = matrix[n-1][n-1];
+        int count = 0;
+        int ans=0;
+        while(low<=high)
+        {
+            int mid = low + (high - low)/2;
+
+            count = helper(matrix, mid);
+
+            if(count < k)
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                ans = mid;
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+    
+    int helper(vector<vector<int>>& matrix, int midValue)
+    {
+        int n = matrix.size();
+        int row = n-1;
+        int col = 0;
+        int count = 0;
+
+        while(row >= 0 && col < n)
+        {
+            if(matrix[row][col] <= midValue)
+            {
+                count+= row+1;
+                col++;
+            }
+            else
+            {
+                row--;
+            }
+        }
+        return count;
+    }
+};
